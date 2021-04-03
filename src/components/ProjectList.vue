@@ -39,7 +39,7 @@
         <v-ons-list>
           <v-ons-list-header>Delete project</v-ons-list-header>
             <v-ons-list-item v-for="(project, x) in
-               this.localStorage.projects" :key="x" @click="removeProject(x)">
+               this.localStorage.projects" :key="x" @click="showModalDeleteConfirm(x)">
                {{project.name}}
            </v-ons-list-item>
         </v-ons-list> 
@@ -47,6 +47,21 @@
         <br><br>
         <v-ons-button>
           Delete
+        </v-ons-button>
+      </p>
+    </v-ons-modal>
+    
+    <v-ons-modal :visible="modalDeleteConfirmVisible" 
+      @click="modalDeleteConfirmVisible = false">
+      <p style="text-align: center">
+        Really delete {{projectToBeDeleted.name}} ?
+        <br><br>
+        <v-ons-button @click="removeProject(projectToBeDeleted)">
+          Yes
+        </v-ons-button>
+        <br> <br>
+        <v-ons-button @click="modalDeleteConfirmVisible = false">
+          Cancel
         </v-ons-button>
       </p>
     </v-ons-modal>
@@ -60,8 +75,10 @@ export default {
   data() {
     return { 
       newProject: { name: 'test', openTasks: [], closedTasks: [] },
+      projectToBeDeleted: { name: 'unselected' },
       modalAddVisible: false,
       modalDeleteVisible: false,
+      modalDeleteConfirmVisible: false,
       timeoutID: 0,
     }
   },
@@ -88,6 +105,11 @@ export default {
       this.modalDeleteVisible = true;
       clearTimeout(this.timeoutID);
       this.timeoutID = setTimeout(() => this.modalDeleteVisible = false, 2000);
+    },
+    showModalDeleteConfirm(p) {
+      this.projectToBeDeleted = p;
+      this.modalDeleteVisible = false;
+      this.modalDeleteConfirmVisible = true;
     }
   }
 }

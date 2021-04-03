@@ -24,7 +24,7 @@ export default {
 <template id="main-page">
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">ProPla</div>
+      <div class="center">Project task planner</div>
     </v-ons-toolbar>
     
     <ProjectList/>
