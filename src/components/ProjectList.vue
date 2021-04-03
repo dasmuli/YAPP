@@ -79,7 +79,6 @@ export default {
       modalAddVisible: false,
       modalDeleteVisible: false,
       modalDeleteConfirmVisible: false,
-      timeoutID: 0,
     }
   },
   methods: {
@@ -98,13 +97,9 @@ export default {
     },
     showModalAdd() {
       this.modalAddVisible = true;
-      clearTimeout(this.timeoutID);
-      this.timeoutID = setTimeout(() => this.modalAddVisible = false, 2000);
     },
     showModalDelete() {
       this.modalDeleteVisible = true;
-      clearTimeout(this.timeoutID);
-      this.timeoutID = setTimeout(() => this.modalDeleteVisible = false, 2000);
     },
     showModalDeleteConfirm(p) {
       this.projectToBeDeleted = p;
