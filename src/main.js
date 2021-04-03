@@ -14,6 +14,11 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
+  data() {
+    return {
+      showWhich: 'DynamicOne'
+    }
+  }
 }).$mount('#app')
 
 
