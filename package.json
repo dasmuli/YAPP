@@ -11,7 +11,8 @@
     "core-js": "^3.10.0",
     "onsenui": "^2.11.2",
     "vue": "^2.6.11",
-    "vue-onsenui": "^2.6.2"
+    "vue-onsenui": "^2.6.2",
+    "vue-reactive-storage": "github:ropbla9/vue-reactive-storage"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.12",
