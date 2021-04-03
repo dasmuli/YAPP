@@ -9,10 +9,48 @@
   </v-ons-list> 
 
   <p style="text-align: center">
-    <v-ons-button @click="$ons.notification.alert('Adding')">
-      Add
+    <v-ons-button @click="showModalAdd()">
+      New
     </v-ons-button>
   </p>  
+  
+  <p style="text-align: center">
+    <v-ons-button @click="showModalDelete()">
+      Delete
+    </v-ons-button>
+  </p>  
+  
+  <v-ons-modal :visible="modalAddVisible" @click="modalAddVisible = false">
+      <p style="text-align: center">
+        Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
+        <br><br>
+        Click or wait
+        <br><br>
+        <v-ons-button @click="addProject()">
+          Add
+        </v-ons-button>
+      </p>
+    </v-ons-modal>
+    
+    <v-ons-modal :visible="modalDeleteVisible" @click="modalDeleteVisible = false">
+      <p style="text-align: center">
+        Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
+        <br><br>
+        <v-ons-list>
+          <v-ons-list-header>Delete project</v-ons-list-header>
+            <v-ons-list-item v-for="(project, x) in
+               this.localStorage.projects" :key="x" @click="removeProject(x)">
+               {{project.name}}
+           </v-ons-list-item>
+        </v-ons-list> 
+
+        <br><br>
+        <v-ons-button>
+          Delete
+        </v-ons-button>
+      </p>
+    </v-ons-modal>
+    
 </div> 
 </template>
 
@@ -20,7 +58,12 @@
 export default {
   name: 'ProjectList',
   data() {
-    return { newProject: { name: null, openTasks: [], closedTasks: [] } }
+    return { 
+      newProject: { name: 'test', openTasks: [], closedTasks: [] },
+      modalAddVisible: false,
+      modalDeleteVisible: false,
+      timeoutID: 0,
+    }
   },
   methods: {
     addProject() {
@@ -28,12 +71,23 @@ export default {
       if (!this.newProject.name) {
         return;
       }
-
-      this.localStorage.projects.push(this.newProject);
-      this.newProject.name = null;
+      var newObj = {};
+      Object.assign(newObj, this.newProject);
+      this.localStorage.projects.push( newObj );
+      //this.newProject.name = null;
     },
     removeProject(x) {
       this.localStorage.projects.splice(x, 1);
+    },
+    showModalAdd() {
+      this.modalAddVisible = true;
+      clearTimeout(this.timeoutID);
+      this.timeoutID = setTimeout(() => this.modalAddVisible = false, 2000);
+    },
+    showModalDelete() {
+      this.modalDeleteVisible = true;
+      clearTimeout(this.timeoutID);
+      this.timeoutID = setTimeout(() => this.modalDeleteVisible = false, 2000);
     }
   }
 }
