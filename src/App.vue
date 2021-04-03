@@ -1,11 +1,14 @@
 
 <script>
-import ProjectList from './components/ProjectList.vue'
+
+import mainpage from './pages/mainpage.vue'
 
 export default {
   name: 'App',
-  components: {
-    ProjectList
+  data() {
+    return {
+      pageStack: [mainpage]
+    };
   }
 }
 </script>
@@ -21,16 +24,15 @@ export default {
 }
 </style>
 
+
 <template id="main-page">
   <v-ons-page>
-    <v-ons-toolbar>
-      <div class="center">Project task planner</div>
-    </v-ons-toolbar>
-    
-    <ProjectList/>
-    
+    <v-ons-navigator swipeable
+    :page-stack="pageStack"
+    @push-page="pageStack.push($event)"
+    @pop-page="pageStack.pop()"
+  ></v-ons-navigator>
   </v-ons-page>
-  
 </template>
 
 
