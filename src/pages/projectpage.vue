@@ -14,10 +14,10 @@ export default {
 <template id="projectpage">
   <v-ons-page>
     <v-ons-toolbar>
+      <div class="left">
+        <v-ons-back-button>Page 1</v-ons-back-button>
+      </div>
       <div class="center">Open tasks</div>
     </v-ons-toolbar>
-    <v-ons-button @click="backPage()">
-          Project page
-    </v-ons-button>
   </v-ons-page>
 </template>

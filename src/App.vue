@@ -11,8 +11,7 @@ export default {
     },
   },
   created: function () {
-    console.log('Just saved to have the created syntax here...')
-    this.$store.state.navigator.stack.push(mainpage);
+    this.pageStack.push(mainpage);
   }
 }
 </script>
