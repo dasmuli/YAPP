@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Vuex from 'vuex';
 
 // Webpack CSS import
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
-import reactiveStorage from "vue-reactive-storage";
 
-// JS import
+import reactiveStorage from "vue-reactive-storage";
 import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need to import it separately
+import storeLike from './store.js';
 
 Vue.use(VueOnsen); // VueOnsen set here as plugin to VUE. Done automatically if a call to window.Vue exists in the startup code.
+Vue.use(Vuex);
 
 // must contain all proxied data fields
 Vue.use(reactiveStorage, {
@@ -24,6 +26,7 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
+  store: new Vuex.Store(storeLike),
   data() {
     return {
       showWhich: 'DynamicOne'

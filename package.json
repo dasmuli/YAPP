@@ -9,19 +9,21 @@
   },
   "dependencies": {
     "core-js": "^3.10.0",
+    "npx": "^3.0.0",
     "onsenui": "^2.11.2",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-onsenui": "^2.6.2",
-    "vue-reactive-storage": "github:ropbla9/vue-reactive-storage"
+    "vue-reactive-storage": "github:ropbla9/vue-reactive-storage",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-eslint": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "vue-template-compiler": "^2.6.11"
+    "eslint": "^7.23.0",
+    "eslint-plugin-vue": "^7.8.0",
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,

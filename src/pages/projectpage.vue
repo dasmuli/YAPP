@@ -1,7 +1,5 @@
 
 <script>
-
-
 export default {
   name: 'projectpage',
   key: 'projectpage',

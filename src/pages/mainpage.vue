@@ -25,7 +25,7 @@ export default {
 <template id="mainpage">
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">Project task planne</div>
+      <div class="center">Simple Agile Project Planner</div>
     </v-ons-toolbar>
     <v-ons-button @click="showProjectPage()">
           Test

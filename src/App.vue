@@ -5,10 +5,14 @@ import mainpage from './pages/mainpage.vue'
 
 export default {
   name: 'App',
-  data() {
-    return {
-      pageStack: [mainpage]
-    };
+  computed: {
+    pageStack() {
+      return this.$store.state.navigator.stack;
+    },
+  },
+  created: function () {
+    console.log('Just saved to have the created syntax here...')
+    this.$store.state.navigator.stack.push(mainpage);
   }
 }
 </script>
