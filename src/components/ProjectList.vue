@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     addProject() {
+      this.modalAddVisible = false;
       // ensure they actually typed something
       if (!this.newProject.name) {
         return;
@@ -34,6 +35,7 @@ export default {
       this.localStorage.projects.splice(x, 1);
     },
     showModalAdd() {
+      this.newProject.name = "";
       this.modalAddVisible = true;
     },
     showModalDelete() {
@@ -74,14 +76,24 @@ export default {
     </v-ons-button>
   </p>  
   
-  <v-ons-modal :visible="modalAddVisible" @click="modalAddVisible = false">
+  <v-ons-modal :visible="modalAddVisible">
       <p style="text-align: center">
-        Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
-        <br><br>
-        Click or wait
-        <br><br>
+          <v-ons-list>
+            <v-ons-list-item>
+              <div class="center">
+                <v-ons-input placeholder="New project's name" float
+                  v-model="newProject.name">
+                </v-ons-input>
+               </div>
+             </v-ons-list-item>
+           </v-ons-list>
+         <br><br>
         <v-ons-button @click="addProject()">
           Add
+        </v-ons-button>
+        <br> <br>
+        <v-ons-button @click="modalAddVisible = false">
+          Cancel
         </v-ons-button>
       </p>
     </v-ons-modal>
