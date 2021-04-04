@@ -7,6 +7,11 @@ export default {
     backPage() {
       this.$emit('pop-page');
     }
+  },
+  computed: {
+    project() {
+      return this.$store.state.project.selected;
+    }
   }
 }
 </script>
@@ -15,9 +20,9 @@ export default {
   <v-ons-page>
     <v-ons-toolbar>
       <div class="left">
-        <v-ons-back-button>Page 1</v-ons-back-button>
+        <v-ons-back-button>Back</v-ons-back-button>
       </div>
-      <div class="center">Open tasks</div>
+      <div class="center">{{project.name}}</div>
     </v-ons-toolbar>
   </v-ons-page>
 </template>

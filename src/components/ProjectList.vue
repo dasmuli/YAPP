@@ -46,7 +46,9 @@ export default {
       this.modalDeleteVisible = false;
       this.modalDeleteConfirmVisible = true;
     },
-    showProjectPage() {
+    showProjectPage(p) {
+      //this.$store.state.project.selected.set( p );
+      this.$store.commit('project/set',p)
       this.pageStack.push(projectpage);
     }
   }
@@ -58,7 +60,7 @@ export default {
 <div>
   <v-ons-list>
   <v-ons-list-header>Projects</v-ons-list-header>
-    <v-ons-list-item modifier="chevron" tappable v-for="(project, x) in this.localStorage.projects" :key="x" @click="showProjectPage()">
+    <v-ons-list-item modifier="chevron" tappable v-for="(project, x) in this.localStorage.projects" :key="x" @click="showProjectPage(project)">
 		{{project.name}}
      <div class="expandable-content">Expandable content</div>
     </v-ons-list-item>
@@ -100,8 +102,6 @@ export default {
     
     <v-ons-modal :visible="modalDeleteVisible" @click="modalDeleteVisible = false">
       <p style="text-align: center">
-        Loading <v-ons-icon icon="fa-spinner" spin></v-ons-icon>
-        <br><br>
         <v-ons-list>
           <v-ons-list-header>Delete project</v-ons-list-header>
             <v-ons-list-item v-for="(project, x) in
@@ -109,10 +109,9 @@ export default {
                {{project.name}}
            </v-ons-list-item>
         </v-ons-list> 
-
-        <br><br>
-        <v-ons-button>
-          Delete
+        <br> <br>
+        <v-ons-button @click="modalDeleteVisible = false">
+          Cancel
         </v-ons-button>
       </p>
     </v-ons-modal>

@@ -28,6 +28,17 @@ export default {
         }
       }
     },
+    project: {
+      namespaced: true,
+      state: {
+        selected: {},
+      },
+      mutations: {
+        set(state, p) {
+          state.selected = p;
+        },
+      }
+    },
   }
 };
 
