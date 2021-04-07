@@ -18,7 +18,7 @@ export default class MultiProjectModel extends Model {
   }
 
   load(data) {
-    this.projects = Array.isArray(data.projects)
+    this.projects = data != null && Array.isArray(data.projects)
       ? data.projects.map(project => new ProjectModel(project))
       : []
     console.log("MultiProjectModel loaded");
