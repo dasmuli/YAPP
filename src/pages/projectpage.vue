@@ -8,12 +8,6 @@ export default {
     backPage() {
       this.$emit('pop-page');
     },
-    addTask() {
-      //var newObj = { name: "TesstTask" };
-      //this.$store.state.project.selected.openTasks.push( newObj );
-      //console.log('Adding task to '+this.$store.state.project.selected.index);
-      this.project.addTask( "Test" );
-    },
   },
   computed: {
     project() {

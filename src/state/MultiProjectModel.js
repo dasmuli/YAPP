@@ -25,6 +25,7 @@ export default class MultiProjectModel extends Model {
   } 
 
   save() {
+    console.log("Saving...");
     return JSON.stringify(this)
   }
 
