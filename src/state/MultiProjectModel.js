@@ -8,9 +8,7 @@ export default class MultiProjectModel extends Model {
 
   static create() {
     var dataString = window.localStorage.getItem('model'); 
-    console.log("Data in local storage: " + dataString);
     var data = JSON.parse(dataString); 
-    console.log("Data contents: " + JSON.stringify(data));
     return new MultiProjectModel( data );
   }
 

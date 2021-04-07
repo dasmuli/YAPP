@@ -1,7 +1,7 @@
 
 import Model from './Model'
-//import TaskModel from './TaskModel'
-//import { remove } from './utils'
+import TaskModel from './TaskModel'
+import { remove } from './utils'
 
 export default class ProjectModel extends Model {
   name = ''
@@ -22,12 +22,12 @@ export default class ProjectModel extends Model {
   load(data) {
     this.name = data.name || 'Unnamed '
     console.log("Project loaded: "+this.name + ", id:" + this.id);
-    //this.openTasks = Array.isArray(data.openTasks)
-    //  ? data.openTasks.map(task => new TaskModel(task))
-    //  : []
-    //this.closedTasks = Array.isArray(data.closedTasks)
-    //  ? data.closedTasks.map(task => new TaskModel(task))
-    //  : []
+    this.openTasks = Array.isArray(data.openTasks)
+      ? data.openTasks.map(task => new TaskModel(task))
+      : []
+    this.closedTasks = Array.isArray(data.closedTasks)
+      ? data.closedTasks.map(task => new TaskModel(task))
+      : []
   }
 
   save() {
@@ -41,15 +41,15 @@ export default class ProjectModel extends Model {
     })
   }
 
-  /*addOpenTask(name) {
-    const task = TaskModel.create(name)
-    this.OpenTasks.push(task)
+  addOpenTask(name) {
+    const task = TaskModel.create(name, "nothing", 8)
+    this.openTasks.push(task)
     return task
   }
 
   removeOpenTasks(ref) {
     return remove(this.openTasks, ref)
-  }*/
+  }
 
   toJSON() {
     // return custom data here if you need to

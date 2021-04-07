@@ -12,6 +12,7 @@ export default {
       //var newObj = { name: "TesstTask" };
       //this.$store.state.project.selected.openTasks.push( newObj );
       //console.log('Adding task to '+this.$store.state.project.selected.index);
+      this.project.addTask( "Test" );
     },
   },
   computed: {
@@ -40,7 +41,7 @@ export default {
     </v-ons-list-item>
   </v-ons-list> 
 
-    <v-ons-fab position="bottom right" @click="addTask()">
+    <v-ons-fab position="bottom right" @click="project.addOpenTask( 'Test' )">
       <v-ons-icon icon="md-plus" ></v-ons-icon>
     </v-ons-fab>
   </v-ons-page>
