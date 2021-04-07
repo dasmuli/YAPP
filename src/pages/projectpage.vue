@@ -9,20 +9,14 @@ export default {
       this.$emit('pop-page');
     },
     addTask() {
-      var newObj = { name: "TesstTask" };
-      this.$store.state.project.selected.openTasks.push( newObj );
-      console.log('Adding task to '+this.$store.state.project.selected.index);
-      //this.localStorage.projects[this.$store.state.project.selected.index].openTasks.push( { name: "t1" } );
-      //this.localStorage.projects[this.$store.state.project.selected.index].openTasks.push( newObj );
-      //this.newProject.name = null;
-              // For reacticy with plains u must replace entire object becouse watch doesn't detect changes on further namespaces/vars inside it.
-        //var copy = JSON.parse(JSON.stringify(this.localStorage.obj));
-            //copy[this.localStorage.projects.key] = this.localStorage.projects.value;
-        //this.localStorage.obj = copy;
+      //var newObj = { name: "TesstTask" };
+      //this.$store.state.project.selected.openTasks.push( newObj );
+      //console.log('Adding task to '+this.$store.state.project.selected.index);
     },
   },
   computed: {
     project() {
+      //return this.$store.state.project.selected;
       return this.$store.state.project.selected;
     }
   },
@@ -40,7 +34,7 @@ export default {
 
     <v-ons-list>
   <v-ons-list-header>Projects</v-ons-list-header>
-    <v-ons-list-item tappable v-for="(task, x) in this.localStorage.projects[this.$store.state.project.selected.index].openTasks" :key="x" >
+    <v-ons-list-item tappable v-for="(task, x) in model.openTasks" :key="x" >
 		{{task.name}}
      <div class="expandable-content">Expandable content</div>
     </v-ons-list-item>

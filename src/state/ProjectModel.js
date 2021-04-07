@@ -21,6 +21,7 @@ export default class ProjectModel extends Model {
 
   load(data) {
     this.name = data.name || 'Unnamed '
+    console.log("Project loaded: "+this.name + ", id:" + this.id);
     //this.openTasks = Array.isArray(data.openTasks)
     //  ? data.openTasks.map(task => new TaskModel(task))
     //  : []
