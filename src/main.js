@@ -17,8 +17,8 @@ Vue.use(Vuex);
 Vue.use(reactiveStorage, {
     "version": '0.1',
     projects: [
-       {name: 'Pro 1', openTaskFirst: '0', openTaskLength: '0', closedTaskFirst: '0', closedTaskLength: '0'},
-       {name: 'Pro 2', openTaskFirst: '0', openTaskLength: '0', closedTaskFirst: '0', closedTaskLength: '0'},
+      // {name: 'Pro 1', openTaskFirst: '0', openTaskLength: '0', closedTaskFirst: '0', closedTaskLength: '0'},
+      //  {name: 'Pro 2', openTaskFirst: '0', openTaskLength: '0', closedTaskFirst: '0', closedTaskLength: '0'},
       ],
 });
 

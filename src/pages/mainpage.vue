@@ -2,6 +2,7 @@
 <script>
 
 import ProjectList from '../components/ProjectList.vue'
+import MultiProjectModel from "../state/MultiProjectModel";
 
 export default {
   name: 'mainpage',
@@ -9,8 +10,17 @@ export default {
   components: {
     ProjectList
   },
-  data() {
+    data() {
     return {
+      model: MultiProjectModel.create()
+    };
+  },
+  mounted() {
+    window.model = this.model;
+  },
+  methods: {
+    dump() {
+      console.log(JSON.stringify(this.model));
     }
   }
 }
@@ -21,6 +31,6 @@ export default {
     <v-ons-toolbar>
       <div class="center">Simple Agile Project Planner</div>
     </v-ons-toolbar>
-    <ProjectList/>
+    <ProjectList :model="model"/>
   </v-ons-page>
 </template>

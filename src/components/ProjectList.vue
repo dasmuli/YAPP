@@ -2,6 +2,7 @@
 
 <script>
 import projectpage from '../pages/projectpage.vue'
+import MultiProjectModel from "../state/MultiProjectModel";
 
 export default {
   name: 'ProjectList',
@@ -14,6 +15,9 @@ export default {
       modalDeleteConfirmVisible: false,
     }
   },
+  props: {
+    model: MultiProjectModel,
+  },
   computed: {
     pageStack() {
       return this.$store.state.navigator.stack;
@@ -21,18 +25,26 @@ export default {
   },
   methods: {
     addProject() {
+      this.model.addProject(this.newProject.name);
       this.modalAddVisible = false;
+      /*
+      
       // ensure they actually typed something
       if (!this.newProject.name) {
         return;
       }
       var newObj = {};
       Object.assign(newObj, this.newProject);
+      newObj.index = this.localStorage.projects.length;
+      console.log("Add initial task for "+newObj.index);
       this.localStorage.projects.push( newObj );
+      this.localStorage.projects[newObj.index].openTasks.push( { name: "olla" } );
       //this.newProject.name = null;
+      */
     },
     removeProject(x) {
-      this.localStorage.projects.splice(x, 1);
+      //this.localStorage.projects.splice(x, 1);#
+      this.model.removeProject(x);
     },
     showModalAdd() {
       this.newProject.name = "";
@@ -58,11 +70,10 @@ export default {
 
 <template>
 <div>
-  <v-ons-list>
+  <v-ons-list v-if="model"> 
   <v-ons-list-header>Projects</v-ons-list-header>
-    <v-ons-list-item modifier="chevron" tappable v-for="(project, x) in this.localStorage.projects" :key="x" @click="showProjectPage(project)">
+    <v-ons-list-item modifier="chevron" tappable v-for="(project, x) in model.projects" :key="x" @click="showProjectPage(project)">
 		{{project.name}}
-     <div class="expandable-content">Expandable content</div>
     </v-ons-list-item>
   </v-ons-list> 
 
@@ -105,7 +116,7 @@ export default {
         <v-ons-list>
           <v-ons-list-header>Delete project</v-ons-list-header>
             <v-ons-list-item v-for="(project, x) in
-               this.localStorage.projects" :key="x" @click="showModalDeleteConfirm(x)">
+               model.projects" :key="x" @click="showModalDeleteConfirm(x)">
                {{project.name}}
            </v-ons-list-item>
         </v-ons-list> 

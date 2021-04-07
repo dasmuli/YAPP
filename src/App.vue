@@ -10,9 +10,10 @@ export default {
       return this.$store.state.navigator.stack;
     },
   },
+  
   created: function () {
     this.pageStack.push(mainpage);
-  }
+  },
 }
 </script>
 
