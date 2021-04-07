@@ -28,8 +28,8 @@ export default {
     </v-ons-toolbar>
 
     <v-ons-list>
-  <v-ons-list-header>Projects</v-ons-list-header>
-    <v-ons-list-item tappable v-for="(task, x) in project.openTasks" :key="x" >
+  <v-ons-list-header>Open Tasks</v-ons-list-header>
+    <v-ons-list-item expandable v-for="(task, x) in project.openTasks" :key="x" >
 		{{task.name}}
      <div class="expandable-content">Expandable content</div>
     </v-ons-list-item>
