@@ -59,8 +59,8 @@ export default {
       this.modalDeleteConfirmVisible = true;
     },
     showProjectPage(p) {
-      this.$store.state.project.selected.set( p );
-      //this.$store.commit('project/set',p)
+      //this.$store.state.project.selected.set( p );
+      this.$store.commit('project/set',p)
       this.pageStack.push(projectpage);
     }
   }
