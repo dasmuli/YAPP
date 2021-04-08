@@ -1,3 +1,7 @@
+// Architecture model by Dave Stewart
+// cf. https://forum.vuejs.org/t/data-sync-on-deeply-nested-structures/40099/7
+// and https://codesandbox.io/s/vue-nested-models-with-tightly-coupled-views-858qd
+
 import ProjectModel from './ProjectModel'
 import Model from './Model'
 import { remove } from './utils'
