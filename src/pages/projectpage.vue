@@ -17,19 +17,19 @@ export default {
   data() {
     return {
       effortLevel: [
-        { text: '0', value: '0' },
-        { text: '1', value: '1' },
-        { text: '2', value: '2' },
-        { text: '3', value: '3' },
-        { text: '5', value: '5' },
-        { text: '8', value: '8' },
-        { text: '13', value: '13' },
-        { text: '20', value: '20' },
-        { text: '40', value: '40' },
-        { text: '100', value: '100' },
+        { text: "0", value: "0" },
+        { text: "1", value: "1" },
+        { text: "2", value: "2" },
+        { text: "3", value: "3" },
+        { text: "5", value: "5" },
+        { text: "8", value: "8" },
+        { text: "13", value: "13" },
+        { text: "20", value: "20" },
+        { text: "40", value: "40" },
+        { text: "100", value: "100" },
       ],
     };
-  }
+  },
 };
 </script>
 
@@ -41,7 +41,7 @@ export default {
       </div>
       <div class="center">{{ project.name }}</div>
       <div class="right">
-          <v-ons-toolbar-button>
+        <v-ons-toolbar-button>
           <v-ons-icon icon="md-chart"></v-ons-icon>
         </v-ons-toolbar-button>
         <v-ons-toolbar-button>
@@ -74,7 +74,11 @@ export default {
                 <v-ons-icon icon="md-bike"></v-ons-icon>
               </label>
               <v-ons-select select-id="task-effort-id" v-model="task.effort">
-                <option v-for="level in effortLevel" :key="level.text" :value="level.value">
+                <option
+                  v-for="level in effortLevel"
+                  :key="level.text"
+                  :value="level.value"
+                >
                   {{ level.text }}
                 </option>
               </v-ons-select>
@@ -90,13 +94,23 @@ export default {
               <label class="center"> Milestone </label>
             </v-ons-list-item>
             <v-ons-list-item>
+              <label class="left">
+                <v-ons-icon icon="md-info"></v-ons-icon>
+              </label>
               <textarea
                 class="textarea textarea--transparent"
                 rows="3"
                 placeholder="Description"
                 float
                 v-model="task.description"
+                auto-grow
               ></textarea>
+            </v-ons-list-item>
+            <v-ons-list-item>
+              <label class="left">
+                <v-ons-icon icon="md-save"></v-ons-icon>
+              </label>
+              <v-ons-button @click="project.save()"> Save </v-ons-button>
             </v-ons-list-item>
           </v-ons-list>
         </div>

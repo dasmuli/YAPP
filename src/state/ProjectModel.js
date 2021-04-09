@@ -30,15 +30,14 @@ export default class ProjectModel extends Model {
       : []
   }
 
-  save() {
-    console.log(`saving post ${this.id} to the server...`)
-    console.log(this)
-  }
-
   clear() {
     this.load({
       name: 'Cleared',
     })
+  }
+
+  save() {
+    window.model.saveToLocalStorage()
   }
 
   addOpenTask() {
