@@ -14,6 +14,22 @@ export default {
       return this.$store.state.project.selected;
     },
   },
+  data() {
+    return {
+      effortLevel: [
+        { text: '0', value: '0' },
+        { text: '1', value: '1' },
+        { text: '2', value: '2' },
+        { text: '3', value: '3' },
+        { text: '5', value: '5' },
+        { text: '8', value: '8' },
+        { text: '13', value: '13' },
+        { text: '20', value: '20' },
+        { text: '40', value: '40' },
+        { text: '100', value: '100' },
+      ],
+    };
+  }
 };
 </script>
 
@@ -24,6 +40,14 @@ export default {
         <v-ons-back-button>Back</v-ons-back-button>
       </div>
       <div class="center">{{ project.name }}</div>
+      <div class="right">
+          <v-ons-toolbar-button>
+          <v-ons-icon icon="md-chart"></v-ons-icon>
+        </v-ons-toolbar-button>
+        <v-ons-toolbar-button>
+          <v-ons-icon icon="md-assignment"></v-ons-icon>
+        </v-ons-toolbar-button>
+      </div>
     </v-ons-toolbar>
 
     <v-ons-list>
@@ -40,10 +64,20 @@ export default {
               <label class="left">
                 <v-ons-icon icon="md-edit"></v-ons-icon>
               </label>
-              <label class="center"> 
+              <label class="center">
                 <v-ons-input placeholder="Task name" float v-model="task.name">
                 </v-ons-input>
               </label>
+            </v-ons-list-item>
+            <v-ons-list-item>
+              <label class="left">
+                <v-ons-icon icon="md-bike"></v-ons-icon>
+              </label>
+              <v-ons-select select-id="task-effort-id" v-model="task.effort">
+                <option v-for="level in effortLevel" :key="level.text" :value="level.value">
+                  {{ level.text }}
+                </option>
+              </v-ons-select>
             </v-ons-list-item>
             <v-ons-list-item>
               <label class="left">
@@ -56,8 +90,13 @@ export default {
               <label class="center"> Milestone </label>
             </v-ons-list-item>
             <v-ons-list-item>
-                <textarea class="textarea" rows="3" placeholder="Description"
-                float v-model="task.description"></textarea>
+              <textarea
+                class="textarea textarea--transparent"
+                rows="3"
+                placeholder="Description"
+                float
+                v-model="task.description"
+              ></textarea>
             </v-ons-list-item>
           </v-ons-list>
         </div>
