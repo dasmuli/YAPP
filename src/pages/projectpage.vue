@@ -55,6 +55,10 @@ export default {
               </label>
               <label class="center"> Milestone </label>
             </v-ons-list-item>
+            <v-ons-list-item>
+                <textarea class="textarea" rows="3" placeholder="Description"
+                float v-model="task.description"></textarea>
+            </v-ons-list-item>
           </v-ons-list>
         </div>
       </v-ons-list-item>
