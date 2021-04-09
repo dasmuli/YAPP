@@ -11,6 +11,7 @@
     "core-js": "^3.10.0",
     "npx": "^3.0.0",
     "onsenui": "^2.11.2",
+    "register-service-worker": "^1.7.1",
     "vue": "^2.6.12",
     "vue-onsenui": "^2.6.2",
     "vue-reactive-storage": "github:ropbla9/vue-reactive-storage",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-eslint": "^4.5.12",
+    "@vue/cli-plugin-pwa": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.23.0",
