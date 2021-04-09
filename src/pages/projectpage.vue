@@ -38,6 +38,15 @@ export default {
           <v-ons-list>
             <v-ons-list-item>
               <label class="left">
+                <v-ons-icon icon="md-edit"></v-ons-icon>
+              </label>
+              <label class="center"> 
+                <v-ons-input placeholder="Task name" float v-model="task.name">
+                </v-ons-input>
+              </label>
+            </v-ons-list-item>
+            <v-ons-list-item>
+              <label class="left">
                 <v-ons-checkbox
                   :input-id="'checkbox-' + task.id"
                   :value="'true'"
