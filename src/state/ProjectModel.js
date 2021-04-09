@@ -41,8 +41,8 @@ export default class ProjectModel extends Model {
     })
   }
 
-  addOpenTask(name) {
-    const task = TaskModel.create(name, "nothing", 8)
+  addOpenTask() {
+    const task = TaskModel.create("New task", "nothing", 8)
     this.openTasks.push(task)
     window.model.saveToLocalStorage()
     return task

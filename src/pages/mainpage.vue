@@ -29,7 +29,7 @@ export default {
 <template id="mainpage">
   <v-ons-page>
     <v-ons-toolbar>
-      <div class="center">Simple Agile Project Planner</div>
+      <div class="center">Yet Another Project Planner</div>
     </v-ons-toolbar>
     <ProjectList :model="model"/>
   </v-ons-page>

@@ -14,7 +14,7 @@ Vue.use(VueOnsen); // VueOnsen set here as plugin to VUE. Done automatically if 
 Vue.use(Vuex);
 
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
