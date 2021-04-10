@@ -1,7 +1,7 @@
 
 import Model from './Model'
 import TaskModel from './TaskModel'
-import { remove } from './utils'
+import { remove,moveElementFromTo } from './utils'
 
 export default class ProjectModel extends Model {
   name = ''
@@ -49,6 +49,10 @@ export default class ProjectModel extends Model {
 
   removeOpenTask(ref) {
     return remove(this.openTasks, ref)
+  }
+
+  moveTaskFirstAfterSecond(firstTask, secondTask) {
+    moveElementFromTo(this.openTasks, firstTask, secondTask)
   }
 
   toJSON() {

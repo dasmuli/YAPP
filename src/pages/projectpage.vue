@@ -7,9 +7,22 @@ export default {
     backPage() {
       this.$emit("pop-page");
     },
-    toggleMoveVertical() {
+    toggleMoveVertical(task) {
+      if(!this.movementButtonVisible)
+      {
+        this.selectedTaskToMove = task;
+      }
+      else
+      {
+        this.selectedTaskToMove = null;
+      }
       this.movementButtonVisible = !this.movementButtonVisible;
     },
+    moveSelectedTaskBelow(secondTask) {
+      this.$store.state.project.selected.moveTaskFirstAfterSecond(this.selectedTaskToMove,secondTask)
+      this.movementButtonVisible = false;
+      this.$store.state.project.selected.save()
+    }
   },
   computed: {
     project() {
@@ -20,6 +33,7 @@ export default {
   data() {
     return {
       movementButtonVisible: false,
+      selectedTaskToMove: null,
       effortLevel: [
         { text: "0", value: "0" },
         { text: "1", value: "1" },
@@ -64,8 +78,7 @@ export default {
         <label class="left">
             <v-ons-icon v-if="movementButtonVisible"
               icon="md-long-arrow-down" style="color: blue;" 
-              @click="$ons.notification
-                    .confirm('Really delete?')"
+              @click="moveSelectedTaskBelow(task)"
             ></v-ons-icon>
         </label>
         <label class="center">
