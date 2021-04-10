@@ -9,6 +9,10 @@ export default class TaskModel extends Model {
 
   isMilestone = false
 
+  date_added = Date.now()
+
+  date_finished = Date.now()
+
   static create(name,description,effort) {
     return new TaskModel({ name,description,effort })
   }
@@ -19,10 +23,14 @@ export default class TaskModel extends Model {
   }
 
   load(data) {
-    this.name           = data.name 
-    this.description    = data.description
-    this.effort         = data.effort
-    this.isMilestone    = data.isMilestone
+    this.name             = data.name 
+    this.description      = data.description
+    this.effort           = data.effort
+    this.isMilestone      = data.isMilestone
+    if('date_added' in data)
+      this.date_added     = data.date_added
+    if('date_finished' in data)
+      this.date_finished  = data.date_finished
   }
 
   clear() {

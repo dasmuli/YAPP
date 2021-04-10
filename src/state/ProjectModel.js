@@ -56,6 +56,7 @@ export default class ProjectModel extends Model {
   }
 
   moveOpenTaskToClosed(task) {
+    task.date_finished = Date.now();
     this.closedTasks.push(remove(this.openTasks, task))
   }
 
