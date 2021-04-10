@@ -194,19 +194,6 @@ export default {
                 </v-ons-button>
                 <span style="display: inline-block; width: 10px"></span>
                 <v-ons-button
-                icon="md-delete"
-                  @click="
-                    $ons.notification
-                      .confirm('Really delete?')
-                      .then((response) => {
-                        if (response == 1) project.removeOpenTask(task);
-                        project.save();
-                      })
-                  "
-                >
-                </v-ons-button>
-                <span style="display: inline-block; width: 10px"></span>
-                <v-ons-button
                   icon="md-swap-vertical"
                   @click="toggleMoveVertical(task)"
                 ></v-ons-button>
