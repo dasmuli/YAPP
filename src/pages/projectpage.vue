@@ -8,21 +8,44 @@ export default {
       this.$emit("pop-page");
     },
     toggleMoveVertical(task) {
-      if(!this.movementButtonVisible)
-      {
+      if (!this.movementButtonVisible) {
         this.selectedTaskToMove = task;
-      }
-      else
-      {
+        this.hideAllExpansions()
+      } else {
         this.selectedTaskToMove = null;
       }
       this.movementButtonVisible = !this.movementButtonVisible;
     },
     moveSelectedTaskBelow(secondTask) {
-      this.$store.state.project.selected.moveTaskFirstAfterSecond(this.selectedTaskToMove,secondTask)
+      this.$store.state.project.selected.moveTaskFirstAfterSecond(
+        this.selectedTaskToMove,
+        secondTask
+      );
       this.movementButtonVisible = false;
-      this.$store.state.project.selected.save()
-    }
+      this.$store.state.project.selected.save();
+      this.hideAllExpansions()
+    },
+    hideAllExpansions() {
+      document.querySelectorAll("ons-list-item").forEach((listItem) => {
+          listItem.hideExpansion();
+      });
+    },
+    updateShowExpansionBehavior() {
+      document.querySelectorAll("ons-list-item").forEach((listItem) => {
+        const showExpansion = listItem.showExpansion.bind(listItem);
+
+        listItem.showExpansion = () => {
+          document
+            .querySelectorAll("ons-list-item.expanded")
+            .forEach((expandedListItem) => {
+              if (expandedListItem !== listItem) {
+                expandedListItem.hideExpansion();
+              }
+            });
+          showExpansion();
+        };
+      });
+    },
   },
   computed: {
     project() {
@@ -68,105 +91,114 @@ export default {
       </div>
     </v-ons-toolbar>
 
-    <v-ons-list>
-      <v-ons-list-header>Open Tasks</v-ons-list-header>
-      <v-ons-list-item
-        expandable
-        v-for="task in project.openTasks"
-        :key="task.id"
-      >
-        <label class="left">
-            <v-ons-icon v-if="movementButtonVisible"
-              icon="md-long-arrow-down" style="color: blue;" 
+    <div class="content">
+      <v-ons-list>
+        <v-ons-list-header>Open Tasks</v-ons-list-header>
+        <v-ons-list-item
+          expandable
+          v-for="task in project.openTasks"
+          :key="task.id"
+        >
+          <label class="left">
+            <v-ons-icon
+              v-if="movementButtonVisible"
+              icon="md-long-arrow-down"
+              style="color: blue"
+              prevent-tap
               @click="moveSelectedTaskBelow(task)"
             ></v-ons-icon>
-        </label>
-        <label class="center">
-          {{ task.name }}
-        </label>
-        <div class="expandable-content">
-          <v-ons-list>
-            <v-ons-list-item>
-              <label class="left">
-                <v-ons-icon icon="md-edit"></v-ons-icon>
-              </label>
-              <label class="center">
-                <v-ons-input placeholder="Task name" float v-model="task.name">
-                </v-ons-input>
-              </label>
-            </v-ons-list-item>
-            <v-ons-list-item>
-              <label class="left">
-                <v-ons-icon icon="md-bike"></v-ons-icon>
-              </label>
-              <v-ons-select select-id="task-effort-id" v-model="task.effort">
-                <option
-                  v-for="level in effortLevel"
-                  :key="level.text"
-                  :value="level.value"
+          </label>
+          <label class="center">
+            {{ task.name }}
+          </label>
+          <div class="expandable-content">
+            <v-ons-list>
+              <v-ons-list-item>
+                <label class="left">
+                  <v-ons-icon icon="md-edit"></v-ons-icon>
+                </label>
+                <label class="center">
+                  <v-ons-input
+                    placeholder="Task name"
+                    float
+                    v-model="task.name"
+                  >
+                  </v-ons-input>
+                </label>
+              </v-ons-list-item>
+              <v-ons-list-item>
+                <label class="left">
+                  <v-ons-icon icon="md-bike"></v-ons-icon>
+                </label>
+                <v-ons-select select-id="task-effort-id" v-model="task.effort">
+                  <option
+                    v-for="level in effortLevel"
+                    :key="level.text"
+                    :value="level.value"
+                  >
+                    {{ level.text }}
+                  </option>
+                </v-ons-select>
+              </v-ons-list-item>
+              <v-ons-list-item>
+                <label class="left">
+                  <v-ons-checkbox
+                    :input-id="'checkbox-' + task.id"
+                    :value="'true'"
+                  >
+                  </v-ons-checkbox>
+                </label>
+                <label class="center"> Milestone </label>
+              </v-ons-list-item>
+              <v-ons-list-item>
+                <label class="left">
+                  <v-ons-icon icon="md-info"></v-ons-icon>
+                </label>
+                <textarea
+                  class="textarea textarea--transparent"
+                  rows="3"
+                  placeholder="Description"
+                  float
+                  v-model="task.description"
+                  auto-grow
+                ></textarea>
+              </v-ons-list-item>
+              <v-ons-list-item>
+                <label class="left">
+                  <v-ons-icon icon="md-save"></v-ons-icon>
+                </label>
+                <v-ons-button
+                  @click="
+                    $ons.notification.toast('Saved', { timeout: 1500 });
+                    project.save();
+                  "
                 >
-                  {{ level.text }}
-                </option>
-              </v-ons-select>
-            </v-ons-list-item>
-            <v-ons-list-item>
-              <label class="left">
-                <v-ons-checkbox
-                  :input-id="'checkbox-' + task.id"
-                  :value="'true'"
+                  Save
+                </v-ons-button>
+                <span style="display: inline-block; width: 10px"></span>
+                <v-ons-button
+                  @click="
+                    $ons.notification
+                      .confirm('Really delete?')
+                      .then((response) => {
+                        if (response == 1) project.removeOpenTask(task);
+                        project.save();
+                      })
+                  "
                 >
-                </v-ons-checkbox>
-              </label>
-              <label class="center"> Milestone </label>
-            </v-ons-list-item>
-            <v-ons-list-item>
-              <label class="left">
-                <v-ons-icon icon="md-info"></v-ons-icon>
-              </label>
-              <textarea
-                class="textarea textarea--transparent"
-                rows="3"
-                placeholder="Description"
-                float
-                v-model="task.description"
-                auto-grow
-              ></textarea>
-            </v-ons-list-item>
-            <v-ons-list-item>
-              <label class="left">
-                <v-ons-icon icon="md-save"></v-ons-icon>
-              </label>
-              <v-ons-button
-                @click="
-                  $ons.notification.toast('Saved', { timeout: 1500 });
-                  project.save();
-                "
-              >
-                Save
-              </v-ons-button>
-              <span style="display: inline-block; width: 10px"></span>
-              <v-ons-button
-                @click="
-                  $ons.notification
-                    .confirm('Really delete?')
-                    .then((response) => {
-                      if (response == 1) project.removeOpenTask(task);
-                      project.save();
-                    })
-                "
-              >
-                Delete
-              </v-ons-button>
-              <span style="display: inline-block; width: 10px"></span>
-              <v-ons-button
-                icon="md-swap-vertical"
-                @click="toggleMoveVertical()"
-              ></v-ons-button>
-            </v-ons-list-item>
-          </v-ons-list>
-        </div>
-      </v-ons-list-item>
-    </v-ons-list>
+                  Delete
+                </v-ons-button>
+                <span style="display: inline-block; width: 10px"></span>
+                <v-ons-button
+                  icon="md-swap-vertical"
+                  @click="toggleMoveVertical(task)"
+                ></v-ons-button>
+              </v-ons-list-item>
+            </v-ons-list>
+          </div>
+        </v-ons-list-item>
+      </v-ons-list>
+    </div>
 
     <v-ons-fab position="bottom right" @click="project.addOpenTask()">
       <v-ons-icon icon="md-plus"></v-ons-icon>
