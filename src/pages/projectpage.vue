@@ -97,6 +97,7 @@ export default {
         <v-ons-toolbar-button>
           <v-ons-icon icon="md-trending-down" @click="showChart()"></v-ons-icon>
         </v-ons-toolbar-button>
+        <span style="display: inline-block; width: 10px"></span>
         <v-ons-toolbar-button>
           <v-ons-icon icon="md-assignment"></v-ons-icon>
         </v-ons-toolbar-button>
@@ -181,18 +182,19 @@ export default {
               </v-ons-list-item>
               <v-ons-list-item>
                 <label class="left">
-                  <v-ons-icon icon="md-save"></v-ons-icon>
+                  <v-ons-icon icon="md-wrench"></v-ons-icon>
                 </label>
                 <v-ons-button
+                icon="md-floppy"
                   @click="
                     $ons.notification.toast('Saved', { timeout: 1500 });
                     project.save();
                   "
                 >
-                  Save
                 </v-ons-button>
                 <span style="display: inline-block; width: 10px"></span>
                 <v-ons-button
+                icon="md-delete"
                   @click="
                     $ons.notification
                       .confirm('Really delete?')
@@ -202,7 +204,6 @@ export default {
                       })
                   "
                 >
-                  Delete
                 </v-ons-button>
                 <span style="display: inline-block; width: 10px"></span>
                 <v-ons-button
@@ -212,7 +213,7 @@ export default {
                 <span style="display: inline-block; width: 10px"></span>
                 <v-ons-button
                   icon="md-assignment-check"
-                  @click="closeTask(task)"
+                  @click="$ons.notification.toast('Finished', { timeout: 1500 });closeTask(task)"
                 ></v-ons-button>
               </v-ons-list-item>
             </v-ons-list>
