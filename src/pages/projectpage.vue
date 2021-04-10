@@ -7,6 +7,9 @@ export default {
     backPage() {
       this.$emit("pop-page");
     },
+    toggleMoveVertical() {
+      this.movementButtonVisible = !this.movementButtonVisible;
+    },
   },
   computed: {
     project() {
@@ -16,6 +19,7 @@ export default {
   },
   data() {
     return {
+      movementButtonVisible: false,
       effortLevel: [
         { text: "0", value: "0" },
         { text: "1", value: "1" },
@@ -42,7 +46,7 @@ export default {
       <div class="center">{{ project.name }}</div>
       <div class="right">
         <v-ons-toolbar-button>
-          <v-ons-icon icon="md-chart"></v-ons-icon>
+          <v-ons-icon icon="md-trending-down"></v-ons-icon>
         </v-ons-toolbar-button>
         <v-ons-toolbar-button>
           <v-ons-icon icon="md-assignment"></v-ons-icon>
@@ -54,10 +58,19 @@ export default {
       <v-ons-list-header>Open Tasks</v-ons-list-header>
       <v-ons-list-item
         expandable
-        v-for="(task, x) in project.openTasks"
-        :key="x"
+        v-for="task in project.openTasks"
+        :key="task.id"
       >
-        {{ task.name }}
+        <label class="left">
+            <v-ons-icon v-if="movementButtonVisible"
+              icon="md-long-arrow-down" style="color: blue;" 
+              @click="$ons.notification
+                    .confirm('Really delete?')"
+            ></v-ons-icon>
+        </label>
+        <label class="center">
+          {{ task.name }}
+        </label>
         <div class="expandable-content">
           <v-ons-list>
             <v-ons-list-item>
@@ -124,13 +137,18 @@ export default {
                   $ons.notification
                     .confirm('Really delete?')
                     .then((response) => {
-                      if(response == 1)
-                      project.removeOpenTask(task);
+                      if (response == 1) project.removeOpenTask(task);
+                      project.save();
                     })
                 "
               >
                 Delete
               </v-ons-button>
+              <span style="display: inline-block; width: 10px"></span>
+              <v-ons-button
+                icon="md-swap-vertical"
+                @click="toggleMoveVertical()"
+              ></v-ons-button>
             </v-ons-list-item>
           </v-ons-list>
         </div>
