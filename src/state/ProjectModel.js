@@ -60,6 +60,11 @@ export default class ProjectModel extends Model {
     this.closedTasks.push(remove(this.openTasks, task))
   }
 
+  moveClosedTaskToOpen(task) {
+    task.date_finished = Date.now();
+    this.openTasks.push(remove(this.closedTasks, task))
+  }
+
   toJSON() {
     // return custom data here if you need to
     return this

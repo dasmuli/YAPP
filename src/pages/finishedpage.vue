@@ -12,6 +12,10 @@ export default {
     backPage() {
       this.$emit("pop-page");
     },
+    reopenTask(task) {
+      this.$store.state.project.selected.moveClosedTaskToOpen(task);
+      this.$store.state.project.selected.save();
+    },
   },
 };
 </script>
@@ -75,10 +79,10 @@ export default {
               </v-ons-list-item>
               <v-ons-list-item>
                 <v-ons-button
-                  icon="md-assignment-check"
+                  icon="md-assignment-return"
                   @click="
                     $ons.notification.toast('Reopened', { timeout: 1500 });
-                    closeTask(task);
+                    reopenTask(task);
                   "
                 ></v-ons-button>
               </v-ons-list-item>
