@@ -7,6 +7,8 @@ export default class TaskModel extends Model {
 
   effort = 3
 
+  isMilestone = false
+
   static create(name,description,effort) {
     return new TaskModel({ name,description,effort })
   }
@@ -20,6 +22,7 @@ export default class TaskModel extends Model {
     this.name           = data.name 
     this.description    = data.description
     this.effort         = data.effort
+    this.isMilestone    = data.isMilestone
   }
 
   clear() {

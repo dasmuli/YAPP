@@ -10,7 +10,7 @@ export default {
     toggleMoveVertical(task) {
       if (!this.movementButtonVisible) {
         this.selectedTaskToMove = task;
-        this.hideAllExpansions()
+        // stressfull? this.hideAllExpansions()
       } else {
         this.selectedTaskToMove = null;
       }
@@ -144,7 +144,8 @@ export default {
                 <label class="left">
                   <v-ons-checkbox
                     :input-id="'checkbox-' + task.id"
-                    :value="'true'"
+                    value="true"
+                    v-model="task.isMilestone"
                   >
                   </v-ons-checkbox>
                 </label>
