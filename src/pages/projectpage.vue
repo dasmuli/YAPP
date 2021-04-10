@@ -27,6 +27,10 @@ export default {
       this.$store.state.project.selected.save();
       this.hideAllExpansions()
     },
+    closeTask(task) {
+      this.$store.state.project.selected.moveOpenTaskToClosed(task);
+      this.$store.state.project.selected.save();
+    },
     hideAllExpansions() {
       document.querySelectorAll("ons-list-item").forEach((listItem) => {
           listItem.hideExpansion();
@@ -204,6 +208,11 @@ export default {
                 <v-ons-button
                   icon="md-swap-vertical"
                   @click="toggleMoveVertical(task)"
+                ></v-ons-button>
+                <span style="display: inline-block; width: 10px"></span>
+                <v-ons-button
+                  icon="md-assignment-check"
+                  @click="closeTask(task)"
                 ></v-ons-button>
               </v-ons-list-item>
             </v-ons-list>

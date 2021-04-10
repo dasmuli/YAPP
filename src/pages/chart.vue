@@ -44,7 +44,6 @@ export default {
       // go through all open cards and add up points
       for (i = 0; i < this.project.openTasks.length; i++) {
         open_points += parseInt(this.project.openTasks[i].effort);
-        console.log("open points at "+i+": "+open_points);
       }
       let finished_points = 0;
       // go through finished and calculate finished value
@@ -71,9 +70,6 @@ export default {
         open_points + finished_points,
         ];
       }
-      console.log("open points: "+open_points);
-
-      //var data = google.visualization.arrayToDataTable(data_array);
 
       return data_array;
     },
@@ -88,14 +84,6 @@ export default {
         vAxis: { minValue: 0 }, // force y=0 in view
         animation: { startup: true, duration: 700 },
       };
-
-      //if (is_animation_on()) {
-      //  options.animation = { startup: true, duration: 700 };
-      //}
-
-      //var chart = new google.visualization.LineChart(
-      //  document.getElementById("burndown_chart")
-      //);
     },
   },
 };

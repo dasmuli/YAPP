@@ -55,6 +55,10 @@ export default class ProjectModel extends Model {
     moveElementFromTo(this.openTasks, firstTask, secondTask)
   }
 
+  moveOpenTaskToClosed(task) {
+    this.closedTasks.push(remove(this.openTasks, task))
+  }
+
   toJSON() {
     // return custom data here if you need to
     return this
