@@ -108,7 +108,10 @@ export default {
               @click="moveSelectedTaskBelow(task)"
             ></v-ons-icon>
           </label>
-          <label class="center">
+          <label class="center" v-if="task.isMilestone" style="color:#0076ff;">
+            {{ task.name }}
+          </label>
+          <label class="center" v-else>
             {{ task.name }}
           </label>
           <div class="expandable-content">
