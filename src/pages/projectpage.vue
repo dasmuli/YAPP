@@ -1,5 +1,7 @@
 
 <script>
+import chartpage from 'chart.vue'
+
 export default {
   name: "projectpage",
   key: "projectpage",
@@ -46,11 +48,17 @@ export default {
         };
       });
     },
+    showChart() {
+      this.pageStack.push(chartpage);
+    }
   },
   computed: {
     project() {
       //return this.$store.state.project.selected;
       return this.$store.state.project.selected;
+    },
+    pageStack() {
+      return this.$store.state.navigator.stack;
     },
   },
   data() {
@@ -83,7 +91,7 @@ export default {
       <div class="center">{{ project.name }}</div>
       <div class="right">
         <v-ons-toolbar-button>
-          <v-ons-icon icon="md-trending-down"></v-ons-icon>
+          <v-ons-icon icon="md-trending-down" @click="showChart()"></v-ons-icon>
         </v-ons-toolbar-button>
         <v-ons-toolbar-button>
           <v-ons-icon icon="md-assignment"></v-ons-icon>

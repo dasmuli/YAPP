@@ -29,7 +29,6 @@ export default {
       this.modalAddVisible = false;
     },
     removeProject(x) {
-      //this.localStorage.projects.splice(x, 1);#
       this.model.removeProject(x);
     },
     showModalAdd() {
