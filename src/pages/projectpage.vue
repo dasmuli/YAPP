@@ -1,6 +1,7 @@
 
 <script>
 import chartpage from "./chart.vue"
+import finishedpage from "./finishedpage.vue"
 
 export default {
   name: "projectpage",
@@ -54,6 +55,9 @@ export default {
     },
     showChart() {
       this.pageStack.push(chartpage);
+    },
+    showFinished() {
+      this.pageStack.push(finishedpage);
     }
   },
   computed: {
@@ -99,7 +103,7 @@ export default {
         </v-ons-toolbar-button>
         <span style="display: inline-block; width: 10px"></span>
         <v-ons-toolbar-button>
-          <v-ons-icon icon="md-assignment"></v-ons-icon>
+          <v-ons-icon icon="md-assignment" @click="showFinished()"></v-ons-icon>
         </v-ons-toolbar-button>
       </div>
     </v-ons-toolbar>
