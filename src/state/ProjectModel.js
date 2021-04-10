@@ -47,7 +47,7 @@ export default class ProjectModel extends Model {
     return task
   }
 
-  removeOpenTasks(ref) {
+  removeOpenTask(ref) {
     return remove(this.openTasks, ref)
   }
 

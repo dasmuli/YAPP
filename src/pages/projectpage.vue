@@ -110,9 +110,27 @@ export default {
               <label class="left">
                 <v-ons-icon icon="md-save"></v-ons-icon>
               </label>
-              <v-ons-button @click="$ons.notification.toast('Saved', {timeout: 1500});project.save()"> Save </v-ons-button>
-              <span style="display:inline-block; width: 10px;"></span>
-              <v-ons-button> Delete </v-ons-button>
+              <v-ons-button
+                @click="
+                  $ons.notification.toast('Saved', { timeout: 1500 });
+                  project.save();
+                "
+              >
+                Save
+              </v-ons-button>
+              <span style="display: inline-block; width: 10px"></span>
+              <v-ons-button
+                @click="
+                  $ons.notification
+                    .confirm('Really delete?')
+                    .then((response) => {
+                      if(response == 1)
+                      project.removeOpenTask(task);
+                    })
+                "
+              >
+                Delete
+              </v-ons-button>
             </v-ons-list-item>
           </v-ons-list>
         </div>

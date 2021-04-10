@@ -27,20 +27,6 @@ export default {
     addProject() {
       this.model.addProject(this.newProject.name);
       this.modalAddVisible = false;
-      /*
-      
-      // ensure they actually typed something
-      if (!this.newProject.name) {
-        return;
-      }
-      var newObj = {};
-      Object.assign(newObj, this.newProject);
-      newObj.index = this.localStorage.projects.length;
-      console.log("Add initial task for "+newObj.index);
-      this.localStorage.projects.push( newObj );
-      this.localStorage.projects[newObj.index].openTasks.push( { name: "olla" } );
-      //this.newProject.name = null;
-      */
     },
     removeProject(x) {
       //this.localStorage.projects.splice(x, 1);#
