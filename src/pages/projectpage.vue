@@ -1,6 +1,6 @@
 
 <script>
-import chartpage from 'chart.vue'
+import chartpage from "./chart.vue"
 
 export default {
   name: "projectpage",
