@@ -13,10 +13,15 @@ export default class MultiProjectModel extends Model {
   projects = []
 
   static create() {
+    try {
     var dataString = window.localStorage.getItem('model'); 
     var dataStringDecompressed = lzdecompressFromUTF16(dataString)
     var data = JSON.parse(dataStringDecompressed); 
     console.log("File size compressed: "+dataString.length+", decompressed size: "+dataStringDecompressed.length)
+    } catch (e) {
+      console.log(e)
+      data = undefined
+    }
     return new MultiProjectModel( data );
   }
 
