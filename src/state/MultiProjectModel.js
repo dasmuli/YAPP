@@ -34,7 +34,7 @@ export default class MultiProjectModel extends Model {
     this.projects = data != null && Array.isArray(data.projects)
       ? data.projects.map(project => new ProjectModel(project))
       : []
-    console.log("MultiProjectModel loaded");
+    console.log("MultiProjectModel loaded, #projects:"+this.projects.length);
   }
 
   save() {
@@ -47,8 +47,8 @@ export default class MultiProjectModel extends Model {
   }
 
   clear() {
-    this.load({
-    })
+    this.projects.splice(0)
+    //this.load({ })
   }
 
   addProject(name) {
@@ -103,8 +103,21 @@ export default class MultiProjectModel extends Model {
       }, 0);
     }
   }
-  
+
   addPadding(str) {
     return String(str).padStart(2, "0");
+  }
+
+  upload_selected_file(file) {
+    var fr = new FileReader();
+    fr.onload = function () {
+      window.model.upload_file(fr.result);
+    };
+    fr.readAsText(file);
+  }
+
+  upload_file(serialData) {
+    this.clear()
+    this.load(JSON.parse(serialData));
   }
 }
