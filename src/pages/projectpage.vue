@@ -119,7 +119,7 @@ export default {
           <label class="left">
             <v-ons-icon
               v-if="movementButtonVisible"
-              icon="md-long-arrow-down"
+              icon="md-long-arrow-up"
               style="color: blue"
               prevent-tap
               @click="moveSelectedTaskBelow(task)"
