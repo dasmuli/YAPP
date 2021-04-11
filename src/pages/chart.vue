@@ -34,7 +34,7 @@ export default {
           new Date(this.project.closedTasks[i].date_finished),
           open_points + finished_points,
         ];
-        finished_points += this.project.closedTasks[i].effort;
+        finished_points += parseInt(this.project.closedTasks[i].effort);
       }
 
       // add first element with full points
