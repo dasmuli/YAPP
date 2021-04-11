@@ -16,7 +16,7 @@ Vue.use(Vuex);
 Vue.use(VueGoogleCharts)
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = process.env.NODE_ENV === 'production'
 
 new Vue({
   render: h => h(App),
