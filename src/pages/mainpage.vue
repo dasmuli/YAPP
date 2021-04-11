@@ -18,6 +18,7 @@ export default {
   },
   mounted() {
     window.model = this.model;
+    this.$store.commit('model/set',this.model)
   },
   methods: {
     dump() {

@@ -1,15 +1,24 @@
 
 <script>
+//import MultiProjectModel from "../state/MultiProjectModel";
+
 export default {
   name: "settings",
   methods: {
     backPage() {
       this.$emit("pop-page");
     },
+
+    download() {
+      this.$store.state.model.selected.download_file();
+    },
   },
   computed: {
     pageStack() {
       return this.$store.state.navigator.stack;
+    },
+    model() {
+      return this.$store.state.model.selected;
     },
   },
 };
@@ -24,6 +33,6 @@ export default {
       <div class="center">Settings</div>
     </v-ons-toolbar>
 
-    Hallo
+    <v-ons-button @click="download()"> Download </v-ons-button>
   </v-ons-page>
 </template>
