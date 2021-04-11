@@ -5,6 +5,8 @@
 import ProjectModel from './ProjectModel'
 import Model from './Model'
 import { remove } from './utils'
+import { compressToUTF16 } from 'lz-string'
+import { decompressFromUTF16 as lzdecompressFromUTF16 } from 'lz-string'
 
 export default class MultiProjectModel extends Model {
 
@@ -12,7 +14,9 @@ export default class MultiProjectModel extends Model {
 
   static create() {
     var dataString = window.localStorage.getItem('model'); 
-    var data = JSON.parse(dataString); 
+    var dataStringDecompressed = lzdecompressFromUTF16(dataString)
+    var data = JSON.parse(dataStringDecompressed); 
+    console.log("File size compressed: "+dataString.length+", decompressed size: "+dataStringDecompressed.length)
     return new MultiProjectModel( data );
   }
 
@@ -34,7 +38,7 @@ export default class MultiProjectModel extends Model {
   }
 
   saveToLocalStorage() {
-    window.localStorage.setItem('model', this.save() );
+    window.localStorage.setItem('model', compressToUTF16(this.save()) );
   }
 
   clear() {
