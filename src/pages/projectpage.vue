@@ -58,6 +58,12 @@ export default {
     },
     showFinished() {
       this.pageStack.push(finishedpage);
+    },
+    scrollToTop()
+    {
+      this.$nextTick(() => {
+        this.$refs.taskList.$el.scrollIntoView({ scrollBehavior: 'smooth' });
+     });
     }
   },
   computed: {
@@ -109,7 +115,7 @@ export default {
     </v-ons-toolbar>
 
     <div class="content">
-      <v-ons-list>
+      <v-ons-list ref="taskList">
         <v-ons-list-header>Open Tasks</v-ons-list-header>
         <v-ons-list-item
           expandable
@@ -191,7 +197,7 @@ export default {
                 <v-ons-button
                 icon="md-floppy"
                   @click="
-                    $ons.notification.toast('Saved', { timeout: 1500 });
+                    $ons.notification.toast('Saved', { timeout: 700 });
                     project.save();
                   "
                 >
@@ -204,7 +210,7 @@ export default {
                 <span style="display: inline-block; width: 10px"></span>
                 <v-ons-button
                   icon="md-assignment-check"
-                  @click="$ons.notification.toast('Finished', { timeout: 1500 });closeTask(task)"
+                  @click="$ons.notification.toast('Finished', { timeout: 700 });closeTask(task)"
                 ></v-ons-button>
               </v-ons-list-item>
             </v-ons-list>
@@ -213,7 +219,7 @@ export default {
       </v-ons-list>
     </div>
 
-    <v-ons-fab position="bottom right" @click="project.addOpenTask()">
+    <v-ons-fab position="bottom right" @click="project.addOpenTask();scrollToTop();">
       <v-ons-icon icon="md-plus"></v-ons-icon>
     </v-ons-fab>
   </v-ons-page>
