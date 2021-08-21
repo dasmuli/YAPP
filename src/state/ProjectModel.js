@@ -21,7 +21,7 @@ export default class ProjectModel extends Model {
     else  // Example project
     {
       this.name="New Project"
-      this.openTasks = [ new TaskModel( null ), new TaskModel( { "name":"Add new task","description":"Use + button bottom","effort":"5","isMilestone":false} ) 
+      this.openTasks = [ new TaskModel( null ), new TaskModel( { "name":"Add new task","description":"Use + button bottom","effort":"5","isMilestone":false} ) , new TaskModel( { "name":"Look at chart","description":"Use the chart button top right","effort":"1","isMilestone":true} ) 
       ];
     }
   }
