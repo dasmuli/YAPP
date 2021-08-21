@@ -19,8 +19,18 @@ export default class TaskModel extends Model {
 
   constructor(data) {
     super()
-    this.load(data)
+    if( data )
+      this.load(data)
+    else
+    {
+      this.name             = "Expand this task"
+      this.description      = "and finish it when you expanded it. Right now. Use the right button."
+      this.effort           = "3"
+      this.isMilestone      = true
+
+    }
   }
+
 
   load(data) {
     this.name             = data.name 

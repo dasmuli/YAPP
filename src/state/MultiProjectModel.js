@@ -27,13 +27,16 @@ export default class MultiProjectModel extends Model {
 
   constructor(data) {
     super()
-    this.load(data)
+    if(data)
+      this.load(data)
+    else // Example data used when local storage empty
+      this.projects = [ new ProjectModel( null ) ]
   }
 
   load(data) {
     this.projects = data != null && Array.isArray(data.projects)
       ? data.projects.map(project => new ProjectModel(project))
-      : []
+      : [ ]
     console.log("MultiProjectModel loaded, #projects:"+this.projects.length);
   }
 

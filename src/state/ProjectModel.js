@@ -16,11 +16,19 @@ export default class ProjectModel extends Model {
 
   constructor(data) {
     super()
-    this.load(data)
+    if(data)
+      this.load(data)
+    else  // Example project
+    {
+      this.name="New Project"
+      this.openTasks = [ new TaskModel( null ), new TaskModel( { "name":"Add new task","description":"Use + button bottom","effort":"5","isMilestone":false} ) 
+      ];
+    }
   }
 
+
   load(data) {
-    this.name = data.name || 'Unnamed '
+    this.name = data.name || 'New project '
     console.log("Project loaded: "+this.name + ", id:" + this.id);
     this.openTasks = Array.isArray(data.openTasks)
       ? data.openTasks.map(task => new TaskModel(task))
