@@ -64,6 +64,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.taskList.$el.scrollIntoView({ scrollBehavior: 'smooth' });
         this.$refs.taskList.$el.children[1].showExpansion();
+        setTimeout(() => {
+         this.$refs.taskList.$el.getElementsByClassName("text-input")[0].focus();
+        });
      });
     }
   },
